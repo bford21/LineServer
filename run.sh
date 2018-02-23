@@ -1,30 +1,10 @@
-# cd $(dirname $0)
+# Accept file as command line parameter
+#file = "$1"
+echo $1
 
-# mvn clean compile
-# ret=$?
-# if [ $ret -ne 0 ]; then
-# exit $ret
-# fi
-# rm -rf target
+# pass file off to application
 
-# ./gradlew compileJava
-# ret=$?
-# if [ $ret -ne 0 ]; then
-# exit $ret
-# fi
-# rm -rf build
+# starts web app
+#mvn spring-boot:run
 
-# cd ../complete
-# mvn clean package
-
-# rm -rf target
-
-# ./gradlew build
-# ret=$?
-# if [ $ret -ne 0 ]; then
-# exit $ret
-# fi
-
-# rm -rf build
-# exit
-mvn spring-boot:run
+$SHELL  
