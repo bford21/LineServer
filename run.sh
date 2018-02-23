@@ -1,10 +1,5 @@
-# Accept file as command line parameter
-#file = "$1"
-echo $1
+# Starts web app and passes file supplied as a parameter
+java -jar target/line-server-0.0.1.jar $1
 
-# pass file off to application
-
-# starts web app
-#mvn spring-boot:run
-
+# Keeps window open to see server log and easy shutdown
 $SHELL  
