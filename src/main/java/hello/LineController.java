@@ -10,7 +10,7 @@ public class LineController {
 
     private static final String template = "Serving up line number %s";
 
-    @RequestMapping("/line")
+    @RequestMapping("/lines")
     public Line line(@RequestParam(value="line", defaultValue="0") String line) {
         return new Line(String.format(template, line));
     }
