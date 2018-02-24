@@ -1,16 +1,24 @@
-package hello;
+package CircleLineServer;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LineController {
 
-    private static final String template = "Serving up line number %s";
+    @RequestMapping(value = "/lines/{lineNum}", method= RequestMethod.GET)
+    @ResponseBody
+    public String line(@PathVariable("lineNum") Integer lineNum){
+        String text = Application.map.get(lineNum);
+        if(text == null){
+            return String.valueOf("Status Code: " + HttpStatus.PAYLOAD_TOO_LARGE);
+        }
+        return "Status Code: " + HttpStatus.ACCEPTED + String.format("%n%n") + Application.map.get(lineNum);
+    }
 
-    @RequestMapping("/lines")
-    public String line(@RequestParam(value="line", defaultValue="0") Integer line) {
-        return Application.map.get(line);
+    @RequestMapping(value = "*")
+    @ResponseBody
+    public String allFallback() {
+        return "Invalid query. Please structure your query as follows: http://localhost:8080/lines/{line number}";
     }
 }
