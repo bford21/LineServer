@@ -13,13 +13,14 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class Application {
+    public static Map<Integer, String> map = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
 
         //Parse file and input each line into a map with <key>=line number & <value>=text on line
         FileInputStream inputStream = null;
         Scanner sc = null;
-        Map<Integer, String> map = new HashMap<>();
+
         int i =1;
         try {
             inputStream = new FileInputStream(args[0]);
