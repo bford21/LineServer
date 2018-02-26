@@ -3,15 +3,17 @@ package CircleLineServer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.http.MediaType;
+
+import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = LineController.class, secure = false)
@@ -20,17 +22,12 @@ public class LineControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    public Lines lines;
-
-//    private static HashMap<Integer, String> allLines = new HashMap<>();
-//    allLines.put(1,"one");
+    //@MockBean
+    //public Lines lines;
 
     // Tests that the correct response is received when asking for a line that doesn't exist.
     @Test
     public void retrieveLineOutOfRange() throws Exception {
-
-        //Mockito.when(lines.insertLine(Mockito.anyInt(), Mockito.anyString()));
 
         // Build a request call that will call /lines/1
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/lines/1").accept(MediaType.APPLICATION_JSON);
@@ -40,13 +37,18 @@ public class LineControllerUnitTest {
         System.out.println(result.getResponse());
         String expected = "Status Code: 413 Payload to large. File does not contain that line number.";
 
-        // Expecting a 413 because we requested line 1 when the hashmap is unpopulated
+        // Never populated the Lines class with data so expecting 413
         Assert.assertEquals(expected, result.getResponse().getContentAsString());
     }
 
+    // Tests that correct response is received when sending a query for an existing line
     @Test
     public void retrieveLine() throws Exception {
-        Mockito.when(lines.insertLine(Mockito.anyInt(), Mockito.anyString()));
+
+        Lines lines = mock(Lines.class);
+
+        Mockito.doNothing().when(lines).insertLine(1,"one");
+        lines.insertLine(1,"one");
 
         // Build a request call that will call /lines/1
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/lines/1").accept(MediaType.APPLICATION_JSON);
@@ -54,10 +56,8 @@ public class LineControllerUnitTest {
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "Status Code: 200 one";
+        String expected = "Status Code: 200<br />one";
 
-        // Expecting a 413 because we requested line 1 when the hashmap is unpopulated
         Assert.assertEquals(expected, result.getResponse().getContentAsString());
-    }
     }
 }
