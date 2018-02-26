@@ -22,9 +22,6 @@ public class LineControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
 
-    //@MockBean
-    //public Lines lines;
-
     // Tests that the correct response is received when asking for a line that doesn't exist.
     @Test
     public void retrieveLineOutOfRange() throws Exception {
