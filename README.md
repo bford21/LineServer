@@ -59,6 +59,9 @@ I chose to use use the Spring Boot framework for this application. I chose Sprin
 
 I spent roughly 5 days on this exercise. I worked for an hr or 2 each day. If I had unlimited time I would have definitely focused on making this API production ready. I would spend some time going over how I handled exceptions making sure I’m returning human readable error messages and not stack traces. Also making sure that whatever error messages I do return do not give away my implementation. I’d also implement a logging system where I can log events such as errors, warnings and debug messages.   
 
+There is also additional work that could be done around testing. I have some basic unit tests but if I had unlimited time I would spend time writing some end to end acceptance tests. Ideally there would also be a CI pipeline for this project where these types of tests would run.
+
+I think having a nice UI would also be something I would work on in order to improve this project. Right now the API returns the value of the line requested and prints it out to a plain white page. Displaying this data in a more creative way would be something I would explore.
 ### If​ ​you​ ​were​ ​to​ ​critique​ ​your​ ​code,​ ​what​ ​would​ ​you​ ​have​ ​to​ ​say​ ​about​ ​it? 
 
 If I were to critique my code I would say that it took a good approach architecturally, but it’s a little rough around the edges. It could use some work in terms of how I handle exceptions and handle edge cases such as if a user provides a file that does not exist.  
