@@ -15,7 +15,7 @@ Once run.sh has successfully been executed you can begin making calls to the API
 
 In order to build my Line Server API you need the following things on your machine.
 - [Maven 3.0 or later](https://maven.apache.org/download.cgi)
-- [Java JRE](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+- [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html)
 - [Git](https://git-scm.com/downloads)
 
 1. Use Git to clone my repository:
